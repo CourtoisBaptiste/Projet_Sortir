@@ -9,6 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campus
 {
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Sortie")
+     */
+    private $id_sortie;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

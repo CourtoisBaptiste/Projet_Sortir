@@ -10,12 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Inscription
 {
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\OneToMany(targetEntity="Participant")
      * @ORM\Column(type="integer")
      */
     private $id_participant;
 
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="Sortie")
      */
     private $id_sortie;
 

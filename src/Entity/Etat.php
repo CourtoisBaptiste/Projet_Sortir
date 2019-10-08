@@ -12,6 +12,13 @@ class Etat
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
+     * @ORM\ManyToOne(targetEntity="Sortie")
+     */
+    private $id_sortie;
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;

@@ -9,6 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Participant
 {
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\OneToMany(targetEntity="Inscription")
+     */
+    private $id_inscription;
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

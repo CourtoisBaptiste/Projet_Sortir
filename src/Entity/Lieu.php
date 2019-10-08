@@ -9,6 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Lieu
 {
+    /**    
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\OneToMany(targetEntity="Ville")
+     */
+    private $id_ville;
+
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -10,6 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Sortie
 {
     /**
+     * @ORM\OneToMany(targetEntity="Etat")
+     */
+    private $id_etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Inscription")
+     */
+    private $id_inscription;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -51,25 +61,6 @@ class Sortie
      */
     private $url_photo;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_organisateur;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_campus;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_lieu;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_etat;
 
     public function getId(): ?int
     {
@@ -160,51 +151,4 @@ class Sortie
         return $this;
     }
 
-    public function getIdOrganisateur(): ?int
-    {
-        return $this->id_organisateur;
-    }
-
-    public function setIdOrganisateur(int $id_organisateur): self
-    {
-        $this->id_organisateur = $id_organisateur;
-
-        return $this;
-    }
-
-    public function getIdCampus(): ?int
-    {
-        return $this->id_campus;
-    }
-
-    public function setIdCampus(int $id_campus): self
-    {
-        $this->id_campus = $id_campus;
-
-        return $this;
-    }
-
-    public function getIdLieu(): ?int
-    {
-        return $this->id_lieu;
-    }
-
-    public function setIdLieu(int $id_lieu): self
-    {
-        $this->id_lieu = $id_lieu;
-
-        return $this;
-    }
-
-    public function getIdEtat(): ?int
-    {
-        return $this->id_etat;
-    }
-
-    public function setIdEtat(int $id_etat): self
-    {
-        $this->id_etat = $id_etat;
-
-        return $this;
-    }
 }
