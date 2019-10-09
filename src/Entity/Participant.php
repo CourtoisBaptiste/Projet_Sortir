@@ -46,16 +46,16 @@ class Participant
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $admin;
+    private $admin = 0;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $actif;
+    private $actif = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="participants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCampus;
 
@@ -68,6 +68,19 @@ class Participant
      * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", mappedBy="dateInscription")
      */
     private $sortiesParticipants;
+
+    private $confirm_password;
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirm_password;
+    }
+
+    public function setConfirmPassword(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
 
     public function __construct()
     {

@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class ParticipantType extends AbstractType
 {
@@ -16,11 +17,8 @@ class ParticipantType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('mail')
-            ->add('password')
-            ->add('admin')
-            ->add('actif')
-            ->add('idCampus')
-            ->add('sortiesParticipants')
+            ->add('password', PasswordType::class)
+            ->add('confirm_password', PasswordType::class)
         ;
     }
 
