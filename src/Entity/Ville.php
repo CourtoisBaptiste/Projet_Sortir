@@ -5,23 +5,19 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CampusRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\VilleRepository")
  */
-class Campus
+class Ville
 {
 
     /**
-<<<<<<< HEAD
-=======
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Sortie")
+     * @ORM\ManyToOne(targetEntity="Lieu")
      */
-    private $id_sortie;
+    private $id_lieu;
 
     /**
->>>>>>> parent of dc7f45f... ManyToOne / OneToMany
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -32,6 +28,11 @@ class Campus
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=5)
+     */
+    private $codePostal;
 
     public function getId(): ?int
     {
@@ -46,6 +47,18 @@ class Campus
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
 
         return $this;
     }

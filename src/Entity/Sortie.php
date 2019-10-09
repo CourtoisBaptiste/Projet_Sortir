@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Sortie
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Etat")
+     * @ORM\OneToMany(targetEntity="Etat")
      */
     private $id_etat;
 

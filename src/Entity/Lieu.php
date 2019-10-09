@@ -12,7 +12,7 @@ class Lieu
     /**    
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\ManyToOne(targetEntity="Ville")
+     * @ORM\OneToMany(targetEntity="Ville")
      */
     private $id_ville;
 

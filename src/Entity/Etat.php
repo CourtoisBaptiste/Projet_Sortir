@@ -12,7 +12,11 @@ class Etat
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
+<<<<<<< HEAD
      * 
+=======
+     * @ORM\ManyToOne(targetEntity="Sortie")
+>>>>>>> parent of dc7f45f... ManyToOne / OneToMany
      */
     private $id_sortie;
 
