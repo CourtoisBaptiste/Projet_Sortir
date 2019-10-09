@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,16 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Sortie
 {
-    /**
-     * @ORM\OneToMany(targetEntity="Etat")
-     */
-    private $id_etat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Inscription")
-     */
-    private $id_inscription;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,35 +24,63 @@ class Sortie
     private $nom;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $duree;
-
-    /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $duree;
+
+    /**
      * @ORM\Column(type="integer")
      */
-    private $nbIncriptionMax;
+    private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description;
+    private $descriptionSortie;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $url_photo;
+    private $idEtat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idLieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCampus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idOrganisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Participant", inversedBy="sortiesParticipants")
+     */
+    private $dateInscription;
+
+    public function __construct()
+    {
+        $this->dateInscription = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,18 +111,6 @@ class Sortie
         return $this;
     }
 
-    public function getDuree(): ?\DateTimeInterface
-    {
-        return $this->duree;
-    }
-
-    public function setDuree(\DateTimeInterface $duree): self
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
-
     public function getDateLimiteInscription(): ?\DateTimeInterface
     {
         return $this->dateLimiteInscription;
@@ -115,40 +123,113 @@ class Sortie
         return $this;
     }
 
-    public function getNbIncriptionMax(): ?int
+    public function getDuree(): ?\DateTimeInterface
     {
-        return $this->nbIncriptionMax;
+        return $this->duree;
     }
 
-    public function setNbIncriptionMax(int $nbIncriptionMax): self
+    public function setDuree(?\DateTimeInterface $duree): self
     {
-        $this->nbIncriptionMax = $nbIncriptionMax;
+        $this->duree = $duree;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getNbInscriptionsMax(): ?int
     {
-        return $this->description;
+        return $this->nbInscriptionsMax;
     }
 
-    public function setDescription(?string $description): self
+    public function setNbInscriptionsMax(int $nbInscriptionsMax): self
     {
-        $this->description = $description;
+        $this->nbInscriptionsMax = $nbInscriptionsMax;
 
         return $this;
     }
 
-    public function getUrlPhoto(): ?string
+    public function getDescriptionSortie(): ?string
     {
-        return $this->url_photo;
+        return $this->descriptionSortie;
     }
 
-    public function setUrlPhoto(?string $url_photo): self
+    public function setDescriptionSortie(?string $descriptionSortie): self
     {
-        $this->url_photo = $url_photo;
+        $this->descriptionSortie = $descriptionSortie;
 
         return $this;
     }
 
+    public function getIdEtat(): ?Etat
+    {
+        return $this->idEtat;
+    }
+
+    public function setIdEtat(?Etat $idEtat): self
+    {
+        $this->idEtat = $idEtat;
+
+        return $this;
+    }
+
+    public function getIdLieu(): ?Lieu
+    {
+        return $this->idLieu;
+    }
+
+    public function setIdLieu(?Lieu $idLieu): self
+    {
+        $this->idLieu = $idLieu;
+
+        return $this;
+    }
+
+    public function getIdCampus(): ?Campus
+    {
+        return $this->idCampus;
+    }
+
+    public function setIdCampus(?Campus $idCampus): self
+    {
+        $this->idCampus = $idCampus;
+
+        return $this;
+    }
+
+    public function getIdOrganisateur(): ?Participant
+    {
+        return $this->idOrganisateur;
+    }
+
+    public function setIdOrganisateur(?Participant $idOrganisateur): self
+    {
+        $this->idOrganisateur = $idOrganisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getDateInscription(): Collection
+    {
+        return $this->dateInscription;
+    }
+
+    public function addDateInscription(Participant $dateInscription): self
+    {
+        if (!$this->dateInscription->contains($dateInscription)) {
+            $this->dateInscription[] = $dateInscription;
+        }
+
+        return $this;
+    }
+
+    public function removeDateInscription(Participant $dateInscription): self
+    {
+        if ($this->dateInscription->contains($dateInscription)) {
+            $this->dateInscription->removeElement($dateInscription);
+        }
+
+        return $this;
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,15 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Participant
 {
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\OneToMany(targetEntity="Inscription")
-     */
-    private $id_inscription;
-
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,12 +29,7 @@ class Participant
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pseudo;
-
-    /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $telephone;
 
@@ -56,19 +44,36 @@ class Participant
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $admin;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $actif;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_campus;
+    private $idCampus;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="idOrganisateur")
+     */
+    private $sorties;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", mappedBy="dateInscription")
+     */
+    private $sortiesParticipants;
+
+    public function __construct()
+    {
+        $this->sorties = new ArrayCollection();
+        $this->sortiesParticipants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,24 +104,12 @@ class Participant
         return $this;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
     public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -152,7 +145,7 @@ class Participant
         return $this->admin;
     }
 
-    public function setAdmin(bool $admin): self
+    public function setAdmin(?bool $admin): self
     {
         $this->admin = $admin;
 
@@ -164,21 +157,80 @@ class Participant
         return $this->actif;
     }
 
-    public function setActif(bool $actif): self
+    public function setActif(?bool $actif): self
     {
         $this->actif = $actif;
 
         return $this;
     }
 
-    public function getIdCampus(): ?int
+    public function getIdCampus(): ?Campus
     {
-        return $this->id_campus;
+        return $this->idCampus;
     }
 
-    public function setIdCampus(int $id_campus): self
+    public function setIdCampus(?Campus $idCampus): self
     {
-        $this->id_campus = $id_campus;
+        $this->idCampus = $idCampus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sortie $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->setIdOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->contains($sorty)) {
+            $this->sorties->removeElement($sorty);
+            // set the owning side to null (unless already changed)
+            if ($sorty->getIdOrganisateur() === $this) {
+                $sorty->setIdOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortiesParticipants(): Collection
+    {
+        return $this->sortiesParticipants;
+    }
+
+    public function addSortiesParticipant(Sortie $sortiesParticipant): self
+    {
+        if (!$this->sortiesParticipants->contains($sortiesParticipant)) {
+            $this->sortiesParticipants[] = $sortiesParticipant;
+            $sortiesParticipant->addDateInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortiesParticipant(Sortie $sortiesParticipant): self
+    {
+        if ($this->sortiesParticipants->contains($sortiesParticipant)) {
+            $this->sortiesParticipants->removeElement($sortiesParticipant);
+            $sortiesParticipant->removeDateInscription($this);
+        }
 
         return $this;
     }
