@@ -21,7 +21,7 @@ class Inscription
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="Sortie")
+     * 
      */
     private $id_sortie;
 
@@ -29,11 +29,6 @@ class Inscription
      * @ORM\Column(type="date")
      */
     private $dateInscription;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getIdParticipant(): ?int
     {

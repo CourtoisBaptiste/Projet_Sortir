@@ -12,7 +12,7 @@ class Etat
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\OneToMany(targetEntity="Sortie")
+     * 
      */
     private $id_sortie;
 

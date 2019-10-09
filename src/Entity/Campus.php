@@ -11,13 +11,6 @@ class Campus
 {
 
     /**
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="Sortie", mappedBy="id")
-     */
-    private $id_sortie;
-
-    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
