@@ -11,10 +11,9 @@ class Campus
 {
 
     /**
-     * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Sortie")
+     * @ORM\OneToMany(targetEntity="Sortie", mappedBy="id")
      */
     private $id_sortie;
 
@@ -32,7 +31,7 @@ class Campus
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id_campus;
     }
 
     public function getNom(): ?string
