@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VilleController extends AbstractController
 {
     /**
-     * @Route("/", name="ville_index", methods={"GET"})
+     * @Route("/villeIndex", name="ville_index", methods={"GET"})
      */
     public function index(VilleRepository $villeRepository): Response
     {

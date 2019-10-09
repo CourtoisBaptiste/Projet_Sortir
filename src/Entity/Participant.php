@@ -2,14 +2,22 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Sortie;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
+ * @UniqueEntity(
+ *  fields={"mail"},
+ *  message="Email déjà utilisé !"
+ * )
  */
-class Participant
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -35,11 +43,13 @@ class Participant
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\EqualTo(propertyPath="confirm_password", message="Confirm_password muste be equal to Password")
      */
     private $password;
 
@@ -69,6 +79,9 @@ class Participant
      */
     private $sortiesParticipants;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Password muste be equal to Confirm_password")
+     */
     private $confirm_password;
     public function getConfirmPassword(): ?string
     {
@@ -247,4 +260,20 @@ class Participant
 
         return $this;
     }
+
+    public function getUsername(){
+        return $this->mail;
+    }
+
+    public function getRoles(){
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt(){
+
+    }
+    public function erasecredentials(){
+
+    }
 }
+

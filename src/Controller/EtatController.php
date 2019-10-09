@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EtatController extends AbstractController
 {
     /**
-     * @Route("/", name="etat_index", methods={"GET"})
+     * @Route("/etatIndex", name="etat_index", methods={"GET"})
      */
     public function index(EtatRepository $etatRepository): Response
     {
