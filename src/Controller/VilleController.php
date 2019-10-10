@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VilleController extends AbstractController
 {
     /**
-     * @Route("/villeIndex", name="ville_index", methods={"GET"})
+     * @Route("/", name="ville_index", methods={"GET"})
      */
     public function index(VilleRepository $villeRepository): Response
     {
@@ -91,4 +91,6 @@ class VilleController extends AbstractController
 
         return $this->redirectToRoute('ville_index');
     }
+
+    
 }

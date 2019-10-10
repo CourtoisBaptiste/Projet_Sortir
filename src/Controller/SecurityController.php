@@ -16,12 +16,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends Controller
 {
-
     /**
-     * @Route("/", name="security_accueil")
+     * @Route("/connexion", name="security_login")
      */
-    public function index(){
-         return $this->render('participant/index.html.twig');
+
+    public function login(){
+
+        return $this->render('security/login.html.twig');
     }
 
     /**
@@ -41,7 +42,7 @@ class SecurityController extends Controller
             $entityManager->persist($participant);
             $entityManager->flush();
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('sortie_index');
         }
 
         return $this->render('security/registration.html.twig', [
@@ -49,11 +50,5 @@ class SecurityController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/connexion", name="security_login")
-     */
 
-    public function login(){
-        return $this->render('security/login.html.twig');
-    }
 }

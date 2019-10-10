@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LieuController extends AbstractController
 {
     /**
-     * @Route("/lieuIndex", name="lieu_index", methods={"GET"})
+     * @Route("/", name="lieu_index", methods={"GET"})
      */
     public function index(LieuRepository $lieuRepository): Response
     {

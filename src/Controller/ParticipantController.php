@@ -55,7 +55,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="participant_show", methods={"GET"})
+     * @Route("/participant/{id}", name="participant_show", methods={"GET"})
      */
     public function show(Participant $participant): Response
     {
@@ -65,7 +65,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="participant_edit", methods={"GET","POST"})
+     * @Route("/participant{id}/edit", name="participant_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Participant $participant): Response
     {
@@ -85,7 +85,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="participant_delete", methods={"DELETE"})
+     * @Route("/participant_delete/{id}", name="participant_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Participant $participant): Response
     {

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/sortie")
+ * @Route("/")
  */
 class SortieController extends AbstractController
 {
@@ -26,7 +26,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="sortie_new", methods={"GET","POST"})
+     * @Route("/addparticipant", name="sortie_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_show", methods={"GET"})
+     * @Route("/participant/{id}", name="sortie_show", methods={"GET"})
      */
     public function show(Sortie $sortie): Response
     {
@@ -59,7 +59,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="sortie_edit", methods={"GET","POST"})
+     * @Route("/participant/{id}/edit", name="sortie_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Sortie $sortie): Response
     {
@@ -79,7 +79,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_delete", methods={"DELETE"})
+     * @Route("/deleteparticipant/{id}", name="sortie_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Sortie $sortie): Response
     {
