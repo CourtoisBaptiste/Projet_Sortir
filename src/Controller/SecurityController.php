@@ -19,7 +19,7 @@ class SecurityController extends Controller
      * @Route("/", name="security_accueil")
      */
     public function index(){
-        // $this.render('participant/new.htm.twig');
+        $this->render('participant/index.html.twig');
     }
 
     /**
