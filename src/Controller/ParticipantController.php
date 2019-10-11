@@ -4,24 +4,30 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ParticipantType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ParticipantRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/participant")
  */
 class ParticipantController extends AbstractController
 {
+
+    private $participantlist = null;
     /**
-     * @Route("/", name="participant_index", methods={"GET"})
+     * @Route("/participantIndex", name="participant_index", methods={"GET"})
      */
-    public function index(ParticipantRepository $participantRepository): Response
+    public function index(EntityManagerInterface $em )
     {
+
+        $this->participantlist = $em->getRepository(Participant::class)->findAll();
+        dump($this->participantlist);
         return $this->render('participant/index.html.twig', [
-            'participants' => $participantRepository->findAll(),
+            'ok' => $this->participantlist,
         ]);
     }
 
@@ -49,7 +55,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="participant_show", methods={"GET"})
+     * @Route("/participant/{id}", name="participant_show", methods={"GET"})
      */
     public function show(Participant $participant): Response
     {
@@ -59,7 +65,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="participant_edit", methods={"GET","POST"})
+     * @Route("/participant{id}/edit", name="participant_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Participant $participant): Response
     {
@@ -79,7 +85,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="participant_delete", methods={"DELETE"})
+     * @Route("/participant_delete/{id}", name="participant_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Participant $participant): Response
     {
