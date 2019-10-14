@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EtatController extends AbstractController
 {
     /**
-     * @Route("/etatIndex", name="etat_index", methods={"GET"})
+     * @Route("/index", name="etat_index", methods={"GET"})
      */
     public function index(EtatRepository $etatRepository): Response
     {
@@ -79,7 +79,7 @@ class EtatController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="etat_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="etat_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Etat $etat): Response
     {

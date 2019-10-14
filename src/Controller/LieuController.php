@@ -79,7 +79,7 @@ class LieuController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="lieu_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="lieu_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Lieu $lieu): Response
     {

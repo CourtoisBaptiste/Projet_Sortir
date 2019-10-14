@@ -19,7 +19,7 @@ class ParticipantController extends AbstractController
 
     private $participantlist = null;
     /**
-     * @Route("/participantIndex", name="participant_index", methods={"GET"})
+     * @Route("/index", name="participant_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $em )
     {
@@ -55,7 +55,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/participant/{id}", name="participant_show", methods={"GET"})
+     * @Route("/{id}", name="participant_show", methods={"GET"})
      */
     public function show(Participant $participant): Response
     {
@@ -65,7 +65,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/participant{id}/edit", name="participant_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="participant_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Participant $participant): Response
     {
@@ -85,7 +85,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/participant_delete/{id}", name="participant_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="participant_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Participant $participant): Response
     {
