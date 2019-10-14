@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VilleController extends AbstractController
 {
     /**
-     * @Route("/", name="ville_index", methods={"GET"})
+     * @Route("/index", name="ville_index", methods={"GET"})
      */
     public function index(VilleRepository $villeRepository): Response
     {
@@ -79,7 +79,7 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ville_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="ville_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Ville $ville): Response
     {

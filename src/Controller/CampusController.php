@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CampusController extends AbstractController
 {
     /**
-     * @Route("/campusIndex", name="campus_index", methods={"GET"})
+     * @Route("/index", name="campus_index", methods={"GET"})
      */
     public function index(CampusRepository $campusRepository): Response
     {
@@ -79,7 +79,7 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="campus_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="campus_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Campus $campus): Response
     {

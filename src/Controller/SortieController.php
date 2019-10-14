@@ -26,7 +26,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/addparticipant", name="sortie_new", methods={"GET","POST"})
+     * @Route("/newsortie", name="sortie_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/participant/{id}", name="sortie_show", methods={"GET"})
+     * @Route("/sortie/{id}", name="sortie_show", methods={"GET"})
      */
     public function show(Sortie $sortie): Response
     {
@@ -59,7 +59,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/participant/{id}/edit", name="sortie_edit", methods={"GET","POST"})
+     * @Route("/sortie/{id}/edit", name="sortie_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Sortie $sortie): Response
     {
@@ -79,7 +79,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/deleteparticipant/{id}", name="sortie_delete", methods={"DELETE"})
+     * @Route("/sortie/{id}/delete", name="sortie_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Sortie $sortie): Response
     {
