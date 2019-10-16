@@ -1,4 +1,31 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {{ form_row(form.nom, {'label': 'Nom de la soirée : ', 'attr': {'placeholder':'Nom d\'utilisateur ...'}}) }}
+    {{ form_row(form.dateHeureDebut, {'label' : 'Date et heure de la soirée :'}) }}
+    {{ form_row(form.dateLimiteInscription, {'label': 'Limite d\'inscription : '}) }}
+    {{ form_row(form.duree, {'label': 'Durée estimée : '}) }}
+    {{ form_row(form.descriptionSortie, {'label': 'Description : ', 'attr': {'placeholder':'Merci de saisir une description de la soirée.'}}) }}
+    {{ form_row(form.idLieu, {'label': 'Lieu de la soirée : '}) }}
+    {{ form_row(form.idCampus, {'label': 'Campus de la soirée : '}) }}
+    {{ form_row(form.idOrganisateur, {'label': 'Organisateur de la soirée : '}) }}
+    {{ form_row(form.dateInscription, {'label': 'Participants de la soirée : '}) }}
+    {{ form_row(form.nbInscriptionsMax, {'label': 'Nombre max. de participants : '}) }}
+    {{ form_row(form.idEtat, {'label': 'Etat de la soirée : '}) }}
+{#    {{ dump(app.request) }}#}
+    {% if app.request.attributes.get('_route') == "newsortie" %}
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="reset" class="btn btn-info">Reset</button>
+        <a class="btn btn-outline-primary" href="{{ path('sortie_index') }}" role="button">Retour</a>
+    {%endif%}
+
+    {% if app.request.attributes.get('_route') == "newsortie" %}
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="reset" class="btn btn-info">Reset</button>
+        <a class="btn btn-outline-primary" href="{{ path('sortie_index') }}" role="button">Retour</a>
+    {%endif%}
+
+    <button type="submit" class="btn btn-primary">Valider</button>
+    <button type="reset" class="btn btn-info">Reset</button>
+    <a class="btn btn-outline-primary" href="{{ path('sortie_index') }}" role="button">Retour</a>
+    <button type="btn" class="btn btn-danger">Supprimer</button>
 {{ form_end(form) }}

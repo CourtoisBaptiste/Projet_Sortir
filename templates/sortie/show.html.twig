@@ -8,31 +8,29 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
                 <td>{{ sortie.nom }}</td>
             </tr>
             <tr>
-                <th>DateHeureDebut</th>
+                <th>Date heure de début</th>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>DateLimiteInscription</th>
+                <th>Date limite d'inscription</th>
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree ? sortie.duree|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Durée</th>
+                <td>{{ sortie.duree ? sortie.duree|date('H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>NbInscriptionsMax</th>
+                <th>Nombre max de participants</th>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
             </tr>
             <tr>
-                <th>DescriptionSortie</th>
+                <th>Description</th>
                 <td>{{ sortie.descriptionSortie }}</td>
             </tr>
         </tbody>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sortie index{% endblock %}
+{% block title %}Sorties{% endblock %}
 
 {% block body %}
     <h1>Sortie index</h1>
@@ -8,38 +8,35 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
-                <th>DateHeureDebut</th>
-                <th>DateLimiteInscription</th>
-                <th>Duree</th>
-                <th>NbInscriptionsMax</th>
-                <th>DescriptionSortie</th>
-                <th>actions</th>
+                <th>Date et heure de début</th>
+                <th>Date limite d'inscription</th>
+                <th>Durée de la soirée</th>
+                <th>Nombre max inscriptions</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
         {% for sortie in sorties %}
             <tr>
-                <td>{{ sortie.id }}</td>
                 <td>{{ sortie.nom }}</td>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.duree ? sortie.duree|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sortie.duree ? sortie.duree|date('H:i') : '' }}</td>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
                 <td>{{ sortie.descriptionSortie }}</td>
                 <td>
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}">show</a>
-                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
+                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}">Voir</a>
+                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Pas de sorties prévues.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('sortie_new') }}">Create new</a>
+    <a href="{{ path('sortie_new') }}"><button type="button" class="btn btn-secondary">Créer sortie</button></a>
 {% endblock %}
